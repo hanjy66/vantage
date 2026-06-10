@@ -1,0 +1,17 @@
+{
+    "dockerfile_lines": [],
+    "graphs": {
+      "Deep Researcher": "./src/open_deep_research/deep_researcher.py:deep_researcher"
+    },
+    "python_version": "3.11",
+    "env": "./.env",
+    "dependencies": [
+      "."
+    ],
+    "configurable": {
+      "mode": "general"
+    },
+    "auth": {
+      "path": "./src/security/auth.py:auth"
+    }
+}

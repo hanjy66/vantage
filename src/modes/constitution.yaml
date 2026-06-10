@@ -1,0 +1,58 @@
+# ADRP Constitution — 跨 mode 通用治理规则
+# 所有 mode 在加载时自动继承这些规则；critic 在评分时必须校验。
+# 新增规则需同时更新 constitution_enforcement 里的 critic 指令。
+
+version: "1.0"
+effective_date: "2026-05-28"
+
+universal_rules:
+  - id: no_hallucination
+    label: 禁止虚构数据
+    rule: 报告中的所有数字、数据点、引用，必须来自研究发现（findings）中的实际来源，不能凭空生成。
+    severity: critical
+
+  - id: citation_required
+    label: 引用格式强制
+    rule: "每个重要事实声明必须附 [数字] 引用，末尾必须有来源列表。格式：[N] 来源标题: URL。"
+    severity: high
+
+  - id: language_match
+    label: 语言一致性
+    rule: 报告语言必须与用户原始 query 语言一致。中文 query → 中文报告，英文 query → 英文报告。
+    severity: high
+
+  - id: no_opener_filler
+    label: 禁止开头填充语
+    rule: 报告第一个字不能是"好的"/"当然"/"以下是"/"根据您的要求"/"我为您"等开场白。直接从正文标题开始。
+    severity: medium
+
+  - id: factual_no_contradiction
+    label: 内部无矛盾
+    rule: 同一报告内不同章节对同一对象的描述不能矛盾。如有不同来源的冲突数据，必须在报告中明确标注"来源存在分歧"。
+    severity: high
+
+  - id: section_min_content
+    label: 章节最低内容量
+    rule: 每个章节（## 级别）至少包含 2 个实质内容点（非标题、非空洞概述）。不允许空章节。
+    severity: medium
+
+  - id: no_unverified_prediction
+    label: 预测需标注
+    rule: 未来预测、趋势判断必须标注"预测"或"分析"字样，与已验证事实区分。
+    severity: medium
+
+# critic 评分时额外附加的指令（注入到 system_prompt 末尾）
+constitution_enforcement: |
+  ## 通用治理规则校验（Constitution v1.0）
+
+  除了上面的 mode-specific 评分维度，请同时校验以下通用规则（发现违规在 improvement_suggestions 里标注 [Constitution]）：
+
+  - [no_hallucination] 数字/数据点是否都能在 findings 里找到来源？
+  - [citation_required] 重要事实是否都带 [N] 引用？来源列表是否完整？
+  - [language_match] 报告语言是否与研究简报语言一致？
+  - [no_opener_filler] 报告第一段是否有开场废话？
+  - [factual_no_contradiction] 同一对象是否在不同章节有矛盾描述？
+  - [section_min_content] 是否有空章节或内容过少的章节（< 2 个实质点）？
+  - [no_unverified_prediction] 预测性内容是否有"预测/分析"标注？
+
+  发现 critical/high severity 违规时，将其纳入 conflicts 列表（severity 字段用 high）。
