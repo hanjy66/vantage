@@ -25,7 +25,7 @@ Vantage 把「深度研究」拆成一条**多智能体流水线**：澄清需�
 - **图表会不会画错 / 画不出？** —— 模型只产**结构化数据**（ChartSpec / ArchSpec），图表和 Mermaid 架构图由**代码确定性渲染**，根治「时灵时不灵」。
 - **跑过的研究能不能复用？** —— 每次研究入**知识图谱**（语义召回），新主题进来先**查重比对**，避免重复劳动，并可一键回看历史。
 
-> 基线 fork 自 [`langchain-ai/open_deep_research`](https://github.com/langchain-ai/open_deep_research)，在其主图之上做了模式注入、跨模型审计、确定性产物、知识图谱与一套生产级前端控制室。
+>主结构灵感来自 [`langchain-ai/open_deep_research`](https://github.com/langchain-ai/open_deep_research)。
 
 ---
 
