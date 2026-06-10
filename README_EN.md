@@ -1,6 +1,6 @@
 <div align="center">
 
-# Vantage
+# VANTAGE Research
 
 **A multi-agent RAG platform for deep research — going beyond retrieval Q&A to produce traceable, auditable, reusable research reports.**
 

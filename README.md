@@ -1,6 +1,6 @@
 <div align="center">
 
-# Vantage
+# VANTAGE Research
 
 **一个面向「深度研究」的多智能体 RAG 平台 — 不止于检索问答，而是产出可溯源、可审计、可复用的研究报告。**
 
